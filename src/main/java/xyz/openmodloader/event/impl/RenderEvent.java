@@ -13,7 +13,7 @@ public class RenderEvent extends Event {
     /**
      * An event that is fired any time an entity is rendered.
      */
-    public static class RenderEntity extends RenderEvent {
+    public static class Entities extends RenderEvent {
 
         /**
          * The Render being rendered.
@@ -61,7 +61,7 @@ public class RenderEvent extends Event {
          * @param yaw The yaw of the entity being rendered.
          * @param partialTicks The current partial ticks.
          */
-        public RenderEntity(Render<?> render, Entity entity, double x, double y, double z, float yaw, float partialTicks) {
+        public Entities(Render<?> render, Entity entity, double x, double y, double z, float yaw, float partialTicks) {
 
             this.render = render;
             this.entity = entity;
@@ -149,7 +149,7 @@ public class RenderEvent extends Event {
          */
         public static boolean onRender(Render<?> render, Entity entity, double x, double y, double z, float yaw, float partialTicks) {
             GlStateManager.pushMatrix();
-            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new RenderEntity(render, entity, x, y, z, yaw, partialTicks));
+            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new Entities(render, entity, x, y, z, yaw, partialTicks));
             GlStateManager.popMatrix();
             return successful;
         }
@@ -158,7 +158,7 @@ public class RenderEvent extends Event {
     /**
      * An event that is fired any time a render layer is rendered.
      */
-    public static class RenderLayer extends RenderEvent {
+    public static class Layers extends RenderEvent {
 
         /**
          * The layer being rendered.
@@ -218,7 +218,7 @@ public class RenderEvent extends Event {
          * @param headPitch The pitch of the entities head.
          * @param scale The scale of the layer;
          */
-        public RenderLayer(LayerRenderer<?> layer, EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float tickAge, float headYaw, float headPitch, float scale) {
+        public Layers(LayerRenderer<?> layer, EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float tickAge, float headYaw, float headPitch, float scale) {
 
             this.layer = layer;
             this.entity = entity;
@@ -328,7 +328,7 @@ public class RenderEvent extends Event {
          */
         public static boolean onRender(LayerRenderer<?> layer, EntityLivingBase entity, float limbSwing, float limbSwingAmount, float partialTicks, float tickAge, float headYaw, float headPitch, float scale) {
             GlStateManager.pushMatrix();
-            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new RenderLayer(layer, entity, limbSwing, limbSwingAmount, partialTicks, tickAge, headYaw, headPitch, scale));
+            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new Layers(layer, entity, limbSwing, limbSwingAmount, partialTicks, tickAge, headYaw, headPitch, scale));
             GlStateManager.popMatrix();
             return successful;
         }
@@ -337,7 +337,7 @@ public class RenderEvent extends Event {
     /**
      * An event that is fired every time a shadow is rendered.
      */
-    public static class RenderShadow extends RenderEvent {
+    public static class Shadows extends RenderEvent {
 
         /**
          * The entity that is having their shadow rendered.
@@ -381,7 +381,7 @@ public class RenderEvent extends Event {
          *        rendered.
          * @param partialTicks The current partial ticks.
          */
-        public RenderShadow(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
+        public Shadows(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
 
             this.entity = entity;
             this.x = x;
@@ -459,7 +459,7 @@ public class RenderEvent extends Event {
          */
         public static boolean onRender(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
             GlStateManager.pushMatrix();
-            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new RenderShadow(entity, x, y, z, yaw, partialTicks));
+            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new Shadows(entity, x, y, z, yaw, partialTicks));
             GlStateManager.popMatrix();
             return successful;
         }
@@ -468,7 +468,7 @@ public class RenderEvent extends Event {
     /**
      * An event that is fired every time entity fire is rendered.
      */
-    public static class RenderFire extends RenderEvent {
+    public static class Fires extends RenderEvent {
 
         /**
          * The entity that is having fire rendered.
@@ -511,7 +511,7 @@ public class RenderEvent extends Event {
          *        rendered.
          * @param partialTicks The current partial ticks.
          */
-        public RenderFire(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
+        public Fires(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
 
             this.entity = entity;
             this.x = x;
@@ -589,7 +589,7 @@ public class RenderEvent extends Event {
          */
         public static boolean onRender(Entity entity, double x, double y, double z, float yaw, float partialTicks) {
             GlStateManager.pushMatrix();
-            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new RenderFire(entity, x, y, z, yaw, partialTicks));
+            final boolean successful = OpenModLoader.INSTANCE.getEventBus().post(new Fires(entity, x, y, z, yaw, partialTicks));
             GlStateManager.popMatrix();
             return successful;
         }
